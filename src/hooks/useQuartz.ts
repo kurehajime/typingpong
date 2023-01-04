@@ -1,10 +1,16 @@
 import { ref } from 'vue';
-export const useQuartz = (interval: number = 1000) => {
+export const useQuartz = (interval: number = 1000)
+    : [() => number,
+        () => void,
+        () => void,
+        () => void,
+        () => boolean,
+    ] => {
     const prevTime = ref(0);
     const tick = ref(0);
     const isRunning = ref(false);
 
-    const time = () => {
+    const time = (): number => {
         return Math.floor(tick.value / interval);
     }
 
@@ -31,15 +37,15 @@ export const useQuartz = (interval: number = 1000) => {
         isRunning.value = false;
     }
 
-    const running = () => {
+    const running = (): boolean => {
         return isRunning.value;
     }
 
-    return {
+    return [
         time,
         start,
         pause,
         reset,
         running
-    };
+    ];
 };
