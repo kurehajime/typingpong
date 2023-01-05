@@ -8,7 +8,7 @@ import { Setting } from '../models/Setting';
 const [getTime, start] = useQuartz(1000);
 const time = ref(0);
 const setting = {
-  width: 550,
+  width: 500,
   height: 600,
   startPoint: { x: 50, y: 60 },
   startVec: { x: 3, y: 3 },
