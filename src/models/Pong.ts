@@ -1,18 +1,19 @@
 import { Point } from "./Point";
+import { Setting } from "./Setting";
 
 export class Pong {
     public ball: Point;
     public vec: Point;
-    static readonly width = 500;
-    static readonly height = 600;
+    public setting: Setting;
 
-    public constructor(ball: Point, vec: Point) {
+    public constructor(setting: Setting, ball: Point, vec: Point) {
         this.ball = ball;
         this.vec = vec;
+        this.setting = setting;
     }
 
     public clone(): Pong {
-        return new Pong(this.ball, this.vec);
+        return new Pong(this.setting, this.ball, this.vec);
     }
 
     public static tick(prev: Pong): Pong {
@@ -21,7 +22,10 @@ export class Pong {
         // 移動
         next.ball = Pong.move(next.ball, next.vec);
         // 壁で跳ね返る
-        next.vec = Pong.bounceWall(next.ball, next.vec);
+        next.vec = Pong.bounceWall(next.setting, next.ball, next.vec);
+
+        // 摩擦
+        next.vec = Pong.friction(next.setting, next.vec);
 
         return next;
     }
@@ -33,12 +37,32 @@ export class Pong {
         }
     }
 
-    private static bounceWall(ball: Point, vec: Point): Point {
+    private static friction(setting: Setting, vec: Point): Point {
         const nextVec = { ...vec }
-        if (ball.x < 0 || ball.x > Pong.width) {
+        const speed = Math.sqrt(nextVec.x * nextVec.x + nextVec.y * nextVec.y);
+        if (speed > setting.minVec) {
+            nextVec.x = nextVec.x * (1 - setting.friction);
+            nextVec.y = nextVec.y * (1 - setting.friction);
+        }
+        return nextVec;
+    }
+
+    private static bounceWall(setting: Setting, ball: Point, vec: Point): Point {
+        const nextVec = { ...vec }
+        let bounce = false;
+        if (ball.x < 0 || ball.x > setting.width) {
             nextVec.x = -nextVec.x;
-        } else if (ball.y < 0 || ball.y > Pong.height) {
+            bounce = true;
+        } else if (ball.y < 0 || ball.y > setting.height) {
             nextVec.y = -nextVec.y;
+            bounce = true;
+        }
+        if (bounce) {
+            const speed = Math.sqrt(nextVec.x * nextVec.x + nextVec.y * nextVec.y);
+            if (speed < setting.bounceVec) {
+                nextVec.x = nextVec.x * (setting.bounceVec / speed);
+                nextVec.y = nextVec.y * (setting.bounceVec / speed);
+            }
         }
         return nextVec;
     }
