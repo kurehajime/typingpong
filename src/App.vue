@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
+import GameElement from './components/GameElement.vue'
 </script>
 
 <template>
-  <HelloWorld />
+  <GameElement />
 </template>
 
 <style scoped>
