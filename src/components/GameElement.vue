@@ -24,15 +24,18 @@ watchEffect(() => {
   pong.value = Pong.tick(pong.value)
 })
 
+
 </script>
 
 <template>
-  <svg :width="setting.width" :height="setting.height">
-    <rect x="0" y="0" :width="setting.width" :height="setting.height" fill="black" />
-    <GridElement :setting="setting" />
-    <rect x="0" y="0" width="550" height="600" fill="transparent" stroke="gray" stroke-width="2" />
-    <BallElement :x="pong.ball.x" :y="pong.ball.y" />
-  </svg>
+  <span class="bg">
+    <svg :width="setting.width" :height="setting.height">
+      <rect x="0" y="0" :width="setting.width" :height="setting.height" fill="black" />
+      <GridElement :setting="setting" />
+      <rect x="0" y="0" width="550" height="600" fill="transparent" stroke="gray" stroke-width="2" />
+      <BallElement :x="pong.ball.x" :y="pong.ball.y" />
+    </svg>
+  </span>
 </template>
 
 <style scoped>
