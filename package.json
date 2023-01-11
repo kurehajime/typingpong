@@ -6,9 +6,12 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "vitest run"
   },
   "dependencies": {
+    "rand-seed": "^1.0.2",
+    "vitest": "^0.27.0",
     "vue": "^3.2.45"
   },
   "devDependencies": {
