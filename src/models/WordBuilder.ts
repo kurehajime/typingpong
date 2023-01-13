@@ -16,8 +16,14 @@ export class WordBuilder {
                 y: i,
             })
         }
+        const random = new Random(seed)
+        for (let index = 0; index < 30; index++) {
+            console.log(random.random())
+        }
+
         return words
     }
+
 
     static pickWord(count: number, col: number, seed: number): string[] {
         const words: string[] = []
