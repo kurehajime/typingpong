@@ -16,12 +16,11 @@ export class WordBuilder {
                 y: i,
             })
         }
-        const random = new Random(seed)
-        for (let index = 0; index < 30; index++) {
-            console.log(random.random())
+        const ys = WordBuilder.shuffleIndex(count, seed)
+        for (let i = 0; i < count; i++) {
+            words[i].y = ys[i]
         }
-
-        return words
+        return words.sort((a, b) => a.y - b.y)
     }
 
 
@@ -35,6 +34,19 @@ export class WordBuilder {
             }
         }
         return words;
+    }
+
+    static shuffleIndex(count: number, seed: number): number[] {
+        const array: number[] = []
+        const random = new Random(seed)
+        for (let i = count - 1; i >= 0; i--) {
+            array.push(i)
+        }
+        for (let i = array.length - 1; i >= 0; i--) {
+            const j = Math.floor(random.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
     }
 
     static fixWord(words: string[], col: number, seed: number): string[] {
