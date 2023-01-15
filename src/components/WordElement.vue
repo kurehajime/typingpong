@@ -10,12 +10,23 @@ type Props = {
 }
 const props = defineProps<Props>()
 
+const cellWidth = (): number => {
+    return props.setting.width / props.setting.col
+}
+const cellHeight = (): number => {
+    return props.setting.height / props.setting.row
+}
+const getX = () => {
+    return props.word.x * cellWidth()
+}
+const getY = () => {
+    return props.word.y * cellHeight()
+}
+
 </script>
 
 <template>
-    <g>
-
-    </g>
+    <rect :x="getX()" :y="getY()" :width="cellWidth()" :height="cellHeight()" fill="gray" />
 </template>
 
 <style scoped>

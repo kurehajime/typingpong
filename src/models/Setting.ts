@@ -8,4 +8,6 @@ export type Setting = {
     bounceVec: number;
     minVec: number;
     friction: number
+    col: number
+    row: number
 }
