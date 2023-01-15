@@ -21,6 +21,7 @@ const setting = {
   friction: 0.005,
   col: 10,
   row: 12,
+  baseRow: 7,
 } as Setting
 const pong = ref<Pong>(new Pong(setting, setting.startPoint, setting.startVec));
 const words = reactive<Word[]>([]);

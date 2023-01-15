@@ -10,4 +10,5 @@ export type Setting = {
     friction: number
     col: number
     row: number
+    baseRow: number
 }

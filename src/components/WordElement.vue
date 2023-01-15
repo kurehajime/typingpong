@@ -20,7 +20,7 @@ const getX = () => {
     return props.word.x * cellWidth()
 }
 const getY = () => {
-    return props.word.y * cellHeight()
+    return (props.word.y + props.setting.baseRow) * cellHeight()
 }
 
 </script>
