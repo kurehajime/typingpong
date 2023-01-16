@@ -2,7 +2,7 @@ import { Word } from "./Word";
 import word_english2048 from '../assets/english2048.json'
 import { Random } from "./Random";
 export class WordBuilder {
-    static buildWord(col: number, count: number, seed: number = 0): Word[] {
+    static buildWord(col: number, count: number, seed: number | null = null): Word[] {
         const words: Word[] = []
         const wordStr = WordBuilder.pickWord(count, col, seed);
         const fixedWordStr = WordBuilder.fixWord(wordStr, col, seed)
@@ -24,7 +24,7 @@ export class WordBuilder {
     }
 
 
-    static pickWord(count: number, col: number, seed: number): string[] {
+    static pickWord(count: number, col: number, seed: number | null = null): string[] {
         const words: string[] = []
         const random = new Random(seed)
         while (words.length < count) {
@@ -36,7 +36,7 @@ export class WordBuilder {
         return words;
     }
 
-    static shuffleIndex(count: number, seed: number): number[] {
+    static shuffleIndex(count: number, seed: number | null = null): number[] {
         const array: number[] = []
         const random = new Random(seed)
         for (let i = count - 1; i >= 0; i--) {
@@ -49,7 +49,7 @@ export class WordBuilder {
         return array;
     }
 
-    static fixWord(words: string[], col: number, seed: number): string[] {
+    static fixWord(words: string[], col: number, seed: number | null = null): string[] {
         const fixedWords: string[] = words
         const random = new Random(seed)
         fixedWords[0] = words[0]
