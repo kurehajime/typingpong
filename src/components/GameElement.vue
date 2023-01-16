@@ -33,7 +33,7 @@ watchEffect(() => {
   pong.value = Pong.tick(pong.value)
 })
 
-const _words = WordBuilder.buildWord(setting.col, 5, new Date().getMilliseconds())
+const _words = WordBuilder.buildWord(setting.col, 5, 5555555)
 _words.forEach(w => {
   words.push(w)
   inputs.push({ word: [], completed: false })
