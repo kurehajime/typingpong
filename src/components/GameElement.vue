@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watchEffect, reactive } from 'vue';
+import { ref, watchEffect, reactive, onMounted, onUnmounted } from 'vue';
 import BallElement from './BallElement.vue';
 import GridElement from './GridElement.vue';
 import WordElement from './WordElement.vue';
@@ -38,6 +38,31 @@ _words.forEach(w => {
   words.push(w)
   inputs.push({ word: [], completed: false })
 })
+
+const onKeyDown = (e: KeyboardEvent) => {
+  for (let i = 0; i < words.length; i++) {
+    const word = words[i]
+    const input = inputs[i]
+    if (input.completed) {
+      continue
+    }
+    const index = input.word.length;
+    if (word.word[index].toUpperCase() === e.key.toUpperCase()) {
+      input.word.push(e.key)
+      if (input.word.length === word.word.length) {
+        console.log('completed')
+        input.completed = true
+      }
+    }
+  }
+}
+
+onMounted(() => {
+  document.addEventListener('keydown', onKeyDown)
+});
+onUnmounted(() => {
+  document.removeEventListener('keydown', onKeyDown)
+});
 
 </script>
 

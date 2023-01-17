@@ -27,6 +27,9 @@ const getX = (index: number) => {
 const getY = () => {
     return (props.word.y + props.setting.baseRow) * cellHeight()
 }
+const hit = (index: number) => {
+    return props.input.word.length > index
+}
 
 </script>
 
@@ -37,6 +40,8 @@ const getY = () => {
             :height="cellHeight()" fill="white" text-anchor="middle" dominant-baseline="central">{{
     keyword()[i - 1]
             }}</text>
+        <rect v-if="hit(i - 1)" :x="getX(i - 1)" :y="getY()" :width="cellWidth()" :height="cellHeight()"
+            fill="transparent" stroke="blue" />
     </g>
 </template>
 
