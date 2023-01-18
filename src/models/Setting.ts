@@ -6,6 +6,7 @@ export type Setting = {
     startPoint: Point;
     startVec: Point;
     bounceVec: number;
+    bounceKeyVec: number,
     minVec: number;
     friction: number
     col: number

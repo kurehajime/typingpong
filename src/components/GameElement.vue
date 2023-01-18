@@ -17,6 +17,7 @@ const setting = {
   startPoint: { x: 50, y: 60 },
   startVec: { x: 3, y: 3 },
   bounceVec: 4,
+  bounceKeyVec: 7,
   minVec: 2,
   friction: 0.005,
   col: 10,
@@ -30,7 +31,7 @@ start()
 
 watchEffect(() => {
   time.value = getTime()
-  pong.value = Pong.tick(pong.value)
+  pong.value = Pong.tick(pong.value, words, inputs)
 })
 
 const _words = WordBuilder.buildWord(setting.col, 5)
